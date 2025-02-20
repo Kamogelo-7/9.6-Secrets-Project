@@ -36,7 +36,7 @@ const db = new pg.Pool({
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  port: process.env.PG_PORT || 5432,
 });
 
 db.connect((err) => {
@@ -140,7 +140,7 @@ app.post("/register", async (req, res) => {
 
     if (checkResult.rows.length > 0) {
       res.status(409).send("User already exists");
-      // return res.render("standError.ejs");
+      // res.render("standError.ejs");
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
