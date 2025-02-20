@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 const saltRounds = 10;
 env.config();
 
+app.set("view engine", "ejs");
+app.set("views", "./views"); // Ensure correct path
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
