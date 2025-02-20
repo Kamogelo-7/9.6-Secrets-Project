@@ -140,7 +140,7 @@ app.post("/register", async (req, res) => {
 
     if (checkResult.rows.length > 0) {
       res.status(409).send("User already exists");
-      res.render("standError.ejs");
+      // return res.render("standError.ejs");
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
