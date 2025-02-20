@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<div class="container text-center py-5">
+  <div class="container">
+    <i class="fas fa-key fa-6x"></i>
+    <h1 class="display-3">Secrets</h1>
+    <p class="lead">Don't keep your secrets, share them anonymously!</p>
+    <hr />
+    <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
+    <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
+  </div>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary space"
+    id="openBtn"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    open↘️
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Application Modal</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/LoginForm.png" alt="" />
+          <p>
+            🎯 Summary <hr />
+            ✅ Local + Google Login <hr />
+            ✅ PostgreSQL for User Storage <hr />
+            ✅Session-Based Authentication <hr />
+            ✅ Secure Password Hashing with bcrypt
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+</div>

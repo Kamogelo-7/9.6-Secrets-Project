@@ -1,0 +1,59 @@
+body {
+  background-image: -webkit-linear-gradient(15deg, #027fed 50%, #000000 50%);
+}
+/* body {
+  background-image: -webkit-linear-gradient(65deg, #027fed 50%, #000000 50%);
+} */
+h1 {
+  color: white;
+}
+h2 {
+  color: #02eda2;
+}
+.lead {
+  padding: 2rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.btn-lg {
+  margin: 1rem;
+}
+#openBtn {
+  background-color: #000000;
+  color: white;
+  margin: 4rem;
+  border-style: none;
+}
+.centered {
+  padding-top: 200px;
+  text-align: center;
+}
+hr {
+  color: antiquewhite;
+}
+.modal-header,
+.modal-footer {
+  background-color: #027fed;
+}
+.btn-secondary {
+  background-color: black;
+}
+.btn-primary {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+.modal-content {
+  background-color: #000;
+  color: white;
+}
+.secret-text {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #000;
+}
+.content {
+  margin-top: 15rem;
+}

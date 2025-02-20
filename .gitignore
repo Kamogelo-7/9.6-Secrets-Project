@@ -1,0 +1,29 @@
+#node_modules
+node_modules
+#dist   // this is the folder where the compiled code will be stored
+dist
+
+env
+.env
+
+#Routes
+/Routes
+
+#socialAuthentication folder
+/SocialAuthentication
+
+#LocalAuthentication folder
+/localAuthentication
+
+echo "node_modules"
+echo "dist"
+echo ".env"
+echo "/Routes"
+echo "/SocialAuthentication"
+echo "/localAuthentication"
+
+solution.js
+
+solution-queries.sql
+
+configDB.js
