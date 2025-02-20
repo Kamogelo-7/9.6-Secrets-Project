@@ -68,3 +68,7 @@ For any questions, feel free to reach out:
 
 - **GitHub:** (https://github.com/Kamogelo-7)
 - **Email:** kamomogasoa17@gmail.com
+
+## Project Link
+You can view the live project here: [Shadow Monarch](https://shadow-monarch.onrender.com/)
+
