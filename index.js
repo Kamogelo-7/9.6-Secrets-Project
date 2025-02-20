@@ -8,7 +8,7 @@ import session from "express-session";
 import env from "dotenv";
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const saltRounds = 10;
 env.config();
 
@@ -267,6 +267,6 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
