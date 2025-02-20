@@ -1,5 +1,3 @@
-# Project Name
-
 ## Description
 
 A web application built using **Node.js, Express.js, EJS, PostgreSQL, CSS, and Boostrap**. <br> This project includes authentication, secret submissions, and a structured backend to handle user data securely.
