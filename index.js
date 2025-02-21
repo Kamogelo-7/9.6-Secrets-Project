@@ -151,7 +151,6 @@ app.post("/register", async (req, res) => {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
       username,
     ]);
-
     if (checkResult.rows.length) {
       //the user *already* exists
       res
