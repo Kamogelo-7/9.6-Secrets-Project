@@ -80,7 +80,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/secrets", async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   if (req.isAuthenticated()) {
     try {
@@ -88,7 +88,7 @@ app.get("/secrets", async (req, res) => {
         `SELECT secret FROM users WHERE email = $1`,
         [req.user.email]
       );
-      console.log(result);
+      // console.log(result);
 
       const secret = result.rows[0]?.secret;
 
