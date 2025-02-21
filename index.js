@@ -79,6 +79,47 @@ app.get("/logout", (req, res) => {
   });
 });
 
+app.get("/secrets", async (req, res) => {
+  console.log(req.user);
+
+  if (req.isAuthenticated()) {
+    try {
+      const result = await db.query(
+        `SELECT secret FROM users WHERE email = $1`,
+        [req.user.email]
+      );
+      console.log(result);
+
+      const secret = result.rows[0]?.secret;
+
+      // Fixing randoNames reference
+      const randomziedIndex = Math.floor(Math.random() * names.length);
+      const randoNames = names[randomziedIndex];
+      if (secret) {
+        res.render("secrets.ejs", { secrets: secret, namesResult: randoNames });
+      } else {
+        res.render("secrets.ejs", {
+          secrets: "No secret yet!",
+          namesResult: randoNames,
+        }); // ✅ Fixed
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("An error occurred while fetching secrets.");
+    }
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/submit", async (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("submit.ejs");
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.get(
   "/auth/google",
   passport.authenticate("google", {
@@ -101,33 +142,6 @@ app.post(
     failureRedirect: "/login",
   })
 );
-//TODO: Add a get route for the submit button
-//Think about how the logic should work with authentication.
-
-app.get("/submit", async (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("submit.ejs");
-  } else {
-    res.redirect("/login");
-  }
-});
-
-//TODO: Create the post route for submit.
-//Handle the submitted data and add it to the database
-
-app.post("/submit", async (req, res) => {
-  const submittedSecret = req.body.secret;
-  try {
-    await db.query("UPDATE users SET secret = $1 WHERE email = $2", [
-      submittedSecret,
-      req.user.email,
-    ]);
-    res.redirect("/secrets");
-  } catch (err) {
-    console.error(`An error occurred: ${err.stack}`);
-    res.status(500).send("An unexpected error occurred. Please try again.");
-  }
-});
 
 app.post("/register", async (req, res) => {
   //* Used object destructuring to extract form data from the html
@@ -137,10 +151,12 @@ app.post("/register", async (req, res) => {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
       username,
     ]);
-
-    if (checkResult.rows.length > 0) {
-      res.status(409).send("User already exists");
-      // res.render("standError.ejs");
+    if (checkResult.rows.length) {
+      //the user *already* exists
+      res
+        .status(409)
+        .render("standError.ejs", { message: "User already exists" });
+      return; // Exit early to prevent further execution
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
@@ -167,31 +183,23 @@ app.post("/register", async (req, res) => {
     res.status(500).send("An unexpected error occurred. Please try again.");
   }
 });
+//TODO: Add a get route for the submit button
+//Think about how the logic should work with authentication.
 
-app.get("/secrets", async (req, res) => {
-  if (req.isAuthenticated()) {
-    const randomziedIndex = Math.floor(Math.random() * names.length);
-    const randoNames = names[randomziedIndex];
+//TODO: Create the post route for submit.
+//Handle the submitted data and add it to the database
 
-    try {
-      const result = await db.query(
-        `SELECT secret FROM users WHERE email = $1`,
-        [req.user.email]
-      );
-      console.debug(result.rows);
-      const validSecret_Data = result.rows.length
-        ? result.rows[0].secret
-        : null;
-
-      res.render("secrets.ejs", {
-        namesResult: randoNames, // Ensure it's always included
-        secrets: validSecret_Data || "No secret yet!",
-      });
-    } catch (err) {
-      throw new Error(err);
-    }
-  } else {
-    res.redirect("/login");
+app.post("/submit", async (req, res) => {
+  const submittedSecret = req.body.secret;
+  try {
+    await db.query("UPDATE users SET secret = $1 WHERE email = $2", [
+      submittedSecret,
+      req.user.email,
+    ]);
+    res.redirect("/secrets");
+  } catch (err) {
+    console.error(`An error occurred: ${err.stack}`);
+    res.status(500).send("An unexpected error occurred. Please try again.");
   }
 });
 
