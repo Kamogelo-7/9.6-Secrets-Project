@@ -4,7 +4,6 @@ A web application built using **Node.js, Express.js, EJS, PostgreSQL, CSS, and B
 
 ## Features
 
-- **User Authentication:** Secure login and signup with hashed passwords.
 - **Social Authentication:** Login with Google using Passport.js.
 - **Secrets Submission:** Users can submit secrets anonymously.
 - **Database Integration:** PostgreSQL for storing user data.
@@ -68,5 +67,5 @@ For any questions, feel free to reach out:
 - **Email:** kamomogasoa17@gmail.com
 
 ## Project Link
-You can view the live project here: [Shadow Monarch](https://shadow-monarch.onrender.com/)
 
+You can view the live project here: [Shadow Monarch](https://shadow-monarch.onrender.com/)
